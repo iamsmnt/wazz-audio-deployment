@@ -35,7 +35,7 @@ usage() {
 }
 
 start() {
-    local services=("${@}")
+    local services=("${@+"$@"}")
     if [ ${#services[@]} -eq 0 ]; then
         echo -e "${GREEN}Starting all services (dev)...${NC}"
         docker compose up --build -d
@@ -54,7 +54,7 @@ start() {
 }
 
 stop() {
-    local services=("${@}")
+    local services=("${@+"$@"}")
     if [ ${#services[@]} -eq 0 ]; then
         echo -e "${YELLOW}Stopping all services (dev)...${NC}"
         docker compose down
@@ -66,7 +66,7 @@ stop() {
 }
 
 build() {
-    local services=("${@}")
+    local services=("${@+"$@"}")
     if [ ${#services[@]} -eq 0 ]; then
         echo -e "${GREEN}Building all images...${NC}"
         docker compose build
@@ -78,7 +78,7 @@ build() {
 }
 
 logs() {
-    local services=("${@}")
+    local services=("${@+"$@"}")
     if [ ${#services[@]} -eq 0 ]; then
         docker compose logs -f
     else
