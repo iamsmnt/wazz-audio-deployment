@@ -49,7 +49,8 @@ services:
       - CELERY_RESULT_BACKEND=db+postgresql://${POSTGRES_USER:-postgres}:${POSTGRES_PASSWORD:-postgres}@db:5432/${POSTGRES_DB:-whazz_audio}
       - SECRET_KEY=${SECRET_KEY:-dev-secret-key}
       - DEBUG=${DEBUG:-false}
-      - FRONTEND_URL=${FRONTEND_URL:-http://localhost}
+      - FRONTEND_URL=${FRONTEND_URL:-http://3.208.13.229}
+      - CORS_ORIGINS=${CORS_ORIGINS}
     depends_on:
       db:
         condition: service_healthy
