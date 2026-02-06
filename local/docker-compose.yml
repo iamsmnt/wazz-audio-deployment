@@ -29,6 +29,9 @@ services:
     environment:
       RABBITMQ_DEFAULT_USER: ${RABBITMQ_USER:-guest}
       RABBITMQ_DEFAULT_PASS: ${RABBITMQ_PASS:-guest}
+      # Increase consumer timeout to 1 hour (matches Celery task_time_limit)
+      # Default 30min is too short for large audio + model downloads
+      RABBITMQ_SERVER_ADDITIONAL_ERL_ARGS: "-rabbit consumer_timeout 3600000"
     volumes:
       - rabbitmq_data:/var/lib/rabbitmq
     healthcheck:
